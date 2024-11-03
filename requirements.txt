@@ -2,7 +2,7 @@ Flask
 requests
 gunicorn
 joblib
-plotly
+plotly>=5.0.0
 scikit-learn
 pandas
 streamlit
