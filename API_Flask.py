@@ -18,7 +18,7 @@ base_path = os.path.dirname(os.path.abspath(__file__))
 
 # Utiliser des chemins relatifs pour le modèle et les images
 model_path = os.path.join(base_path, 'model.pkl')
-global_importance_image_path = 'C:/Users/Pc Portable Michel/Downloads/P7/global_importance.png'
+global_importance_image_path = 'global_importance.png'
 
 # Charger le modèle initial
 model = joblib.load(model_path)
