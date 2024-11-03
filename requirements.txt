@@ -1,0 +1,11 @@
+Flask
+requests
+gunicorn
+joblib
+scikit-learn
+pandas
+streamlit
+matplotlib
+numpy
+shap
+ipython
