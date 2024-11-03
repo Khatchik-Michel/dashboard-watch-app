@@ -62,8 +62,8 @@ if uploaded_file is not None:
 
     # Bouton pour lancer les prédictions
     if st.button("Prédire"):
-        # Appel à l'API Flask en local sur le port 5000
-        api_url = "http://127.0.0.1:5000/predict"
+        # Appel à l'API Flask
+        api_url = "https://dashboard-watch-app.onrender.com"
         response = requests.post(api_url, json=data_json, headers={"Content-Type": "application/json"})
         
         if response.status_code == 200:
@@ -112,19 +112,19 @@ if st.session_state['predictions'] is not None:
     # Afficher le graphique d'importance locale seulement après que la prédiction a été faite
     if st.session_state['local_importance_generated'] and selected_id is not None:
         st.write("Affichage de l'importance locale des caractéristiques")
-        image_url = f"http://127.0.0.1:5000/get_local_importance/{selected_id}"
+        image_url = f"get_local_importance/{selected_id}"
         st.image(image_url, caption=f"Importance locale des caractéristiques pour l'ID {selected_id}", use_column_width=True)
 
 # Bouton pour afficher l'importance globale des caractéristiques
 if st.button("Afficher l'importance globale des caractéristiques"):
     with st.spinner('Chargement du graphique...'):
         # Appel à l'API Flask pour obtenir l'image de l'importance globale
-        api_url_global = "http://127.0.0.1:5000/get_global_importance"
+        api_url_global = "get_global_importance"
         response_global = requests.get(api_url_global)
 
         if response_global.status_code == 200:
             # Afficher l'image d'importance globale
-            img_url_global = "http://127.0.0.1:5000/get_global_importance"
+            img_url_global = "get_global_importance"
             st.image(img_url_global, caption="Importance globale des caractéristiques", use_column_width=True)
         else:
             st.write("Erreur lors de la génération de l'importance globale.")
@@ -134,7 +134,7 @@ if data is not None and selected_id is not None and selected_feature is not None
     client_value = data.loc[data['SK_ID_CURR'] == selected_id, selected_feature].values[0]
     
     # Appel à l'API pour obtenir la distribution de la feature
-    api_feature_url = "http://127.0.0.1:5000/get_feature_distribution"
+    api_feature_url = "get_feature_distribution"
     response = requests.post(api_feature_url, json={"feature": selected_feature, "client_value": client_value})
     
     if response.status_code == 200:
@@ -161,7 +161,7 @@ if data is not None and selected_id is not None:
         client_score = st.session_state['predictions']['prediction'][0][1]  # Score du client
 
         # Préparer les données pour l'API
-        api_bivariate_url = "http://127.0.0.1:5000/get_bivariate_data"
+        api_bivariate_url = "get_bivariate_data"
         payload = {
             "feature_x": selected_feature_x,
             "feature_y": selected_feature_y,
